@@ -82,11 +82,17 @@ function start(client) {
         });
     });
 
+    client.onButton(async buttonResponse => {
+        await client.sendText(buttonResponse.from, buttonResponse.selectedButtonId == "1" ? "Pengajuan surat disetujui!" : "Pengajuan surat ditolak!");
+    })
+
     client.onMessage(async message => {
         if (message.body === 'hi') {
             await client.sendText(message.from, '👋 Hello!');
         } else if (message.body == 'p') {
             await client.sendText(message.from, '?');
+        } else if (message.body == 'button') {
+            await client.sendButtons(message.from, "Pilih setuju jika pengajuan di setuju, dan pilih tolak jika pengajuan ditolak", [{ id: "1", text: "Setuju" }, { id: "2", text: "Tolak" }], 'Persetujuan')
         }
     });
 }
