@@ -114,5 +114,6 @@ server.listen(PORT, function () {
 create({
     sessionId: 'bot-notif',
     useChrome: true,
+    headless: true,
     // licenseKey : 'CB504B49-44F240FA-BB53A828-6F2C467B', 
 }).then(client => start(client));
